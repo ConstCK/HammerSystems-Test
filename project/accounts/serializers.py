@@ -35,3 +35,18 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ('phone_number', 'pass_code', 'invite_code', 'active_invite_code', 'invited_profiles')
+
+
+class SuccessfulAuthSerializer(serializers.Serializer):
+    phone_number = serializers.CharField()
+    pass_code = serializers.CharField()
+
+
+class SuccessfulLoginSerializer(serializers.Serializer):
+    phone_number = serializers.CharField()
+    pass_code = serializers.CharField()
+    invite_code = serializers.CharField()
+
+
+class SuccessResponseSerializer(serializers.Serializer):
+    message = serializers.CharField()

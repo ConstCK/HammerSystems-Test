@@ -1,15 +1,28 @@
 from django.shortcuts import render
+from drf_spectacular.utils import extend_schema, OpenApiResponse, OpenApiParameter
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 import time
 
 from .models import Profile
-from .serializers import PhoneNumberSerializer, PassCodeSerializer, ActivateCodeSerializer, ProfileSerializer
+from .serializers import PhoneNumberSerializer, PassCodeSerializer, ActivateCodeSerializer, ProfileSerializer, \
+    SuccessfulAuthSerializer, SuccessfulLoginSerializer, SuccessResponseSerializer
 
 from .services import generate_pass_code, generate_invite_code
 
 
+@extend_schema(summary='Authentication',
+               request=PhoneNumberSerializer,
+               responses={
+                   status.HTTP_200_OK: OpenApiResponse(
+                       response=SuccessfulAuthSerializer,
+                       description='Успешная аутентификация'),
+                   status.HTTP_400_BAD_REQUEST: OpenApiResponse(
+                       description='Введенные данные некорректны'),
+               },
+               )
 @api_view(['POST'])
 def auth(request):
     serializer = PhoneNumberSerializer(data=request.data)
@@ -22,12 +35,22 @@ def auth(request):
         else:
             user.pass_code = pass_code
             user.save()
-        data = {'phone_number': request.data, 'pass_code': pass_code}
+        data = {'phone_number': request.data['phone_number'], 'pass_code': pass_code}
         time.sleep(2)
         return Response(data)
     raise ValidationError('Некорректный номер телефона...')
 
 
+@extend_schema(summary='Authorization',
+               request=PassCodeSerializer,
+               responses={
+                   status.HTTP_200_OK: OpenApiResponse(
+                       response=SuccessfulLoginSerializer,
+                       description='Успешная аутентификация'),
+                   status.HTTP_400_BAD_REQUEST: OpenApiResponse(
+                       description='Введенные данные некорректны'),
+               },
+               )
 @api_view(['POST'])
 def login(request):
     serializer = PassCodeSerializer(data=request.data)
@@ -45,6 +68,16 @@ def login(request):
         return Response(data)
 
 
+@extend_schema(summary='Code activation',
+               request=ActivateCodeSerializer,
+               responses={
+                   status.HTTP_200_OK: OpenApiResponse(
+                       response=SuccessResponseSerializer,
+                       description='Успешная активация кода'),
+                   status.HTTP_400_BAD_REQUEST: OpenApiResponse(
+                       description='Введенные данные некорректны'),
+               },
+               )
 @api_view(['POST'])
 def activate_code(request):
     serializer = ActivateCodeSerializer(data=request.data)
@@ -65,6 +98,16 @@ def activate_code(request):
         return Response({'message': 'Invite code успешно активирован'})
 
 
+@extend_schema(summary='Authorization',
+               request=PassCodeSerializer,
+               responses={
+                   status.HTTP_200_OK: OpenApiResponse(
+                       response=ProfileSerializer,
+                       description='Получение данных профиля'),
+                   status.HTTP_400_BAD_REQUEST: OpenApiResponse(
+                       description='Введенные данные некорректны'),
+               },
+               )
 @api_view(['POST'])
 def profile(request):
     serializer = PassCodeSerializer(data=request.data)
@@ -72,14 +115,17 @@ def profile(request):
         user = Profile.objects.filter(pass_code=request.data['pass_code']).first()
         if user:
             data = ProfileSerializer(user, many=False)
-            if user.active_invite_code:
+            if user.invite_code:
                 invited_codes_profiles = Profile.objects.filter(active_invite_code=user.invite_code)
                 invited_list = [item for item in invited_codes_profiles]
-                data = ProfileSerializer({'phone_number': user.phone_number,
-                                          'pass_code': user.pass_code,
-                                          'invite_code': user.invite_code,
-                                          'active_invite_code': user.active_invite_code,
-                                          'invited_profiles': invited_list}, many=False)
+            else:
+                invited_list = []
+
+            data = ProfileSerializer({'phone_number': user.phone_number,
+                                      'pass_code': user.pass_code,
+                                      'invite_code': user.invite_code,
+                                      'active_invite_code': user.active_invite_code,
+                                      'invited_profiles': invited_list}, many=False)
 
             return Response({'data': data.data})
         raise ValidationError('Ошибка авторизации...')

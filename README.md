@@ -12,6 +12,7 @@ get_random_secret_key()"
 Важно: На ПК должен быть установлен Docker Desktop для запуска в контейнере
 
 EndPoints:
+http://127.0.0.1:8000/admin/ - Доступ к панели администрирования. Используйте admin для имени и пароля.
 http://127.0.0.1:8000/api/v1/auth/ - Аутентификация (post запрос с телом по типу 
 {"phone_number": "+79181234567"})
 http://127.0.0.1:8000/api/v1/login/ - Авторизация (post запрос с телом по типу 
@@ -20,5 +21,9 @@ http://127.0.0.1:8000/api/v1/activate/ - Использование invite code 
 {"pass_code": "8183", "invite_code": "XuyqaY"})
 http://127.0.0.1:8000/api/v1/profile/ - Получение данных профиля (post запрос с телом по типу 
 {"pass_code": "8183"})
+http://127.0.0.1:8000/schema/swagger-ui/ - Получение Swagger документации. 
+http://127.0.0.1:8000/schema/redoc/ - Получение Swagger документации в redoc формате. 
+
+
 
 
