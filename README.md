@@ -9,9 +9,16 @@ BackEnd:
 или в консоли при помощи "from django.core.management.utils import get_random_secret_key
 get_random_secret_key()"
 Запустите сервер из каталога проекта (python manage.py runserver)
+Важно: На ПК должен быть установлен Docker Desktop для запуска в контейнере
 
 EndPoints:
-http://127.0.0.1:8000/api/v1/auth - Аутентификация
-http://127.0.0.1:8000/api/v1/login - Авторизация
+http://127.0.0.1:8000/api/v1/auth/ - Аутентификация (post запрос с телом по типу 
+{"phone_number": "+79181234567"})
+http://127.0.0.1:8000/api/v1/login/ - Авторизация (post запрос с телом по типу 
+{"pass_code": "7421"})
+http://127.0.0.1:8000/api/v1/activate/ - Использование invite code (post запрос с телом по типу 
+{"pass_code": "8183", "invite_code": "XuyqaY"})
+http://127.0.0.1:8000/api/v1/profile/ - Получение данных профиля (post запрос с телом по типу 
+{"pass_code": "8183"})
 
 
