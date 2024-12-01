@@ -24,7 +24,8 @@ from .services import generate_pass_code, generate_invite_code
                },
                )
 @api_view(['POST'])
-def auth(request):
+def api_auth(request):
+    """Представление для api аутентификации пользователя по номеру телефона"""
     serializer = PhoneNumberSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         pass_code = generate_pass_code()
@@ -52,7 +53,8 @@ def auth(request):
                },
                )
 @api_view(['POST'])
-def login(request):
+def api_login(request):
+    """Представление для api авторизации пользователя по 4-значному коду"""
     serializer = PassCodeSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         user = Profile.objects.filter(pass_code=request.data['pass_code']).first()
@@ -79,9 +81,9 @@ def login(request):
                },
                )
 @api_view(['POST'])
-def activate_code(request):
+def api_activate_code(request):
+    """Представление для api активации 6-значного invite кода"""
     serializer = ActivateCodeSerializer(data=request.data)
-
     if serializer.is_valid(raise_exception=True):
         user = Profile.objects.filter(invite_code=request.data['invite_code']).first()
         current_user = Profile.objects.filter(pass_code=request.data['pass_code']).first()
@@ -109,7 +111,8 @@ def activate_code(request):
                },
                )
 @api_view(['POST'])
-def profile(request):
+def api_profile(request):
+    """Представление для api получения данных о текущем пользователе"""
     serializer = PassCodeSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         user = Profile.objects.filter(pass_code=request.data['pass_code']).first()
@@ -129,3 +132,23 @@ def profile(request):
 
             return Response({'data': data.data})
         raise ValidationError('Ошибка авторизации...')
+
+
+def auth(request):
+    """Представление для аутентификации пользователя по номеру телефона"""
+    pass
+
+
+def login(request):
+    """Представление для авторизации пользователя по 4-значному коду"""
+    pass
+
+
+def activate_code(request):
+    """Представление для активации 6-значного invite кода"""
+    pass
+
+
+def profile(request):
+    """Представление для получения данных о текущем пользователе"""
+    pass
