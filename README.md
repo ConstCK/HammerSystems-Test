@@ -1,4 +1,5 @@
-BackEnd:
+Тестовое задание для Hammer Systems. Приложение для авторизации по номеру телефона.
+Используемый стек: Django, DRF, Postgresql (sqlite3 на pythonanywhere.com), SCSS, Docker
 
 * Скопируйте проект к себе на ПК при помощи: git clone https://github.com/ConstCK/HammerSystems-Test.git
 * Перейдите в папку проекта
@@ -44,20 +45,20 @@ http://localhost:8080/ - Доступ к администрированию БД
 * http://localhost:8000/schema/redoc/ - Получение Swagger документации в redoc формате. 
 
 ### Запуск на pythonanywhere.com:
-* http://localhost:8000/accounts/auth/ - Аутентификация с вводом номера телефона
+* http://ConstKK.pythonanywhere.com/accounts/auth/ - Аутентификация с вводом номера телефона
 формата: +12345678900
-* http://localhost:8000/accounts/login/ - Авторизация с вводом 4-значного pass code с переходом 
+* http://ConstKK.pythonanywhere.com/accounts/login/ - Авторизация с вводом 4-значного pass code с переходом 
 на страницу профиля
-* http://localhost:8000/admin/ - Доступ к панели администрирования.
+* http://ConstKK.pythonanywhere.com/admin/ - Доступ к панели администрирования.
 Используйте admin для имени и пароля.
-* http://localhost:8000/api/v1/auth/ - Аутентификация (post запрос с телом по типу 
+* http://ConstKK.pythonanywhere.com/api/v1/auth/ - Аутентификация (post запрос с телом по типу 
 {"phone_number": "+79181234567"})
-* http://localhost:8000/api/v1/login/ - Авторизация (post запрос с телом по типу 
+* http://ConstKK.pythonanywhere.com/api/v1/login/ - Авторизация (post запрос с телом по типу 
 {"pass_code": "7421"})
-* http://localhost:8000/api/v1/activate/ - Использование invite code (post запрос с телом по типу 
+* http://ConstKK.pythonanywhere.com/api/v1/activate/ - Использование invite code (post запрос с телом по типу 
 {"pass_code": "8183", "invite_code": "XuyqaY"})
-* http://localhost:8000/api/v1/profile/ - Получение данных профиля (post запрос с телом по типу 
+* http://ConstKK.pythonanywhere.com/api/v1/profile/ - Получение данных профиля (post запрос с телом по типу 
 {"pass_code": "8183"})
-* http://localhost:8000/schema/swagger-ui/ - Получение Swagger документации. 
-* http://localhost:8000/schema/redoc/ - Получение Swagger документации в redoc формате. 
+* http://ConstKK.pythonanywhere.com/schema/swagger-ui/ - Получение Swagger документации. 
+* http://ConstKK.pythonanywhere.com/schema/redoc/ - Получение Swagger документации в redoc формате. 
 
