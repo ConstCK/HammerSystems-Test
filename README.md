@@ -1,5 +1,6 @@
-Тестовое задание для Hammer Systems. Приложение для авторизации по номеру телефона.
-Используемый стек: Django, DRF, Postgresql (sqlite3 на pythonanywhere.com), SCSS, Docker
+# Тестовое задание для Hammer Systems. Приложение для авторизации по номеру телефона.
+
+## **_Используемый стек: Django, DRF, Postgresql (sqlite3 на pythonanywhere.com), SCSS, Docker_**
 
 * Скопируйте проект к себе на ПК при помощи: git clone https://github.com/ConstCK/HammerSystems-Test.git
 * Перейдите в папку проекта
@@ -14,8 +15,8 @@ get_random_secret_key()"
 
 ## Важно: На ПК должен быть установлен Docker Desktop **для запуска в контейнере**
 
-1. Запустите Docker Desktop на пк В консоли из каталога проекта
-2. Запустите "docker-compose up" для запуска в контейнере
+1. Запустите Docker Desktop на пк
+2. В консоли из каталога проекта запустите "docker-compose up" для запуска в контейнере
 
 EndPoints:
 
