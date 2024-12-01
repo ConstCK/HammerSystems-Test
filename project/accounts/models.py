@@ -15,6 +15,9 @@ class Profile(models.Model):
     active_invite_code = models.CharField(max_length=6, null=True, blank=True,
                                           verbose_name='активированный 6-значный код-приглашение')
 
+    def __str__(self):
+        return f'Пользователь с номером {self.phone_number}'
+
     class Meta:
         verbose_name = 'Профиль пользователя'
         verbose_name_plural = 'Профили пользователей'

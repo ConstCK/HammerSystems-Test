@@ -8,14 +8,6 @@ class PhoneNumberSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ('phone_number',)
 
-    # def is_valid(self, raise_exception=False):
-    #     """Переопределение метода для игнорирования валидации существующих номеров телефона"""
-    #
-    #     profile = Profile.objects.filter(phone_number=self.initial_data['phone_number']).first()
-    #     if profile:
-    #         return True
-    #     return super().is_valid(raise_exception=False)
-
 
 class PassCodeSerializer(serializers.ModelSerializer):
     class Meta:

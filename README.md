@@ -6,7 +6,7 @@ BackEnd:
 * Установите все зависимости при помощи pip install -r requirements.txt
 * Создайте файл .env в каталоге проекта и пропишите в нем настройки по примеру .env.example
 * Например ключ для Django можно сгенерировать по пути https://realorangeone.github.io/django-secret-key-generator/
-или в консоли при помощи "from django.core.management.utils import get_random_secret_key
+или в python консоли при помощи "from django.core.management.utils import get_random_secret_key,
 get_random_secret_key()"
 
 **_Запустите сервер из каталога проекта (python manage.py runserver)_**
@@ -25,6 +25,11 @@ http://localhost:8080/ - Доступ к администрированию БД
 
 ### Запуск на локальном сервере или в контейнере:
 
+* http://localhost:8000/accounts/auth/ - Аутентификация с вводом номера телефона
+формата: +12345678900
+* http://localhost:8000/accounts/login/ - Авторизация с вводом 4-значного pass code с переходом 
+на страницу профиля
+
 * http://localhost:8000/admin/ - Доступ к панели администрирования.
 Используйте admin для имени и пароля.
 * http://localhost:8000/api/v1/auth/ - Аутентификация (post запрос с телом по типу 
@@ -39,6 +44,10 @@ http://localhost:8080/ - Доступ к администрированию БД
 * http://localhost:8000/schema/redoc/ - Получение Swagger документации в redoc формате. 
 
 ### Запуск на pythonanywhere.com:
+* http://localhost:8000/accounts/auth/ - Аутентификация с вводом номера телефона
+формата: +12345678900
+* http://localhost:8000/accounts/login/ - Авторизация с вводом 4-значного pass code с переходом 
+на страницу профиля
 * http://localhost:8000/admin/ - Доступ к панели администрирования.
 Используйте admin для имени и пароля.
 * http://localhost:8000/api/v1/auth/ - Аутентификация (post запрос с телом по типу 

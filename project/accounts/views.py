@@ -165,12 +165,9 @@ class AuthUserView(FormView):
 
         except ValidationError:
             form.add_error(None, 'Некорректный номер телефона')
-            return render(request, self.template_name, {'form': form,
-                                                        'title': 'Аутентификация пользователя по номеру телефона'})
-
-
-class SuccessfulAuth(TemplateView):
-    template_name = 'successful_auth.html'
+            return render(request, self.template_name,
+                          {'form': form,
+                           'title': 'Аутентификация пользователя по номеру телефона'})
 
 
 class LoginView(FormView):
@@ -178,34 +175,33 @@ class LoginView(FormView):
     form_class = LoginForm
     model = Profile
     template_name = 'login.html'
-    # success_url = reverse_lazy('profile')
     extra_context = {'title': 'Авторизация пользователя с использование 4-значного кода'}
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         invite_code = generate_invite_code()
-
-        if form.is_valid():
-            user = Profile.objects.filter(pass_code=form.cleaned_data['pass_code']).first()
-            if not user:
-                form.add_error(None, 'Неверный pass code')
+        try:
+            if form.is_valid():
+                user = Profile.objects.filter(pass_code=form.cleaned_data['pass_code']).first()
+                if not user:
+                    form.add_error(None, 'Неверный pass code')
+                    return render(request, self.template_name,
+                                  {'form': form,
+                                   'title': 'Авторизация пользователя с использование 4-значного кода'})
+                if not user.invite_code:
+                    user.invite_code = invite_code
+                    user.save()
+                return redirect(reverse_lazy('profile', kwargs={'pass_code': form.cleaned_data['pass_code']}))
+            else:
+                form.add_error(None, 'Некорректный pass code')
                 return render(request, self.template_name,
                               {'form': form,
                                'title': 'Авторизация пользователя с использование 4-значного кода'})
-            if not user.invite_code:
-                user.invite_code = invite_code
-                user.save()
-            return redirect(reverse_lazy('profile', kwargs={'pass_code': form.cleaned_data['pass_code']}))
-        else:
+        except ValidationError:
             form.add_error(None, 'Некорректный pass code')
             return render(request, self.template_name,
                           {'form': form,
                            'title': 'Авторизация пользователя с использование 4-значного кода'})
-
-
-def activate_code(request):
-    """Представление для активации 6-значного invite кода"""
-    pass
 
 
 class ProfileView(FormView):
@@ -222,7 +218,6 @@ class ProfileView(FormView):
             context['profile'] = profile
             context['invited_profiles'] = invited_profiles if invited_profiles else None
             context['title'] = f'Профиль пользователя с номером {profile.phone_number}'
-            print('!!', context['invited_profiles'])
         return context
 
     def post(self, request, *args, **kwargs):
@@ -230,18 +225,25 @@ class ProfileView(FormView):
 
         if form.is_valid():
             user = Profile.objects.filter(invite_code=form.cleaned_data['activated_code']).first()
-            current_user = Profile.objects.filter(pass_code = self.kwargs['pass_code']).first()
+            current_user = Profile.objects.filter(pass_code=self.kwargs['pass_code']).first()
             if not user:
                 form.add_error(None, 'Неверный invite code')
-                return render(request, self.template_name,
-                              {'form': form,
-                               })
+                context = self.get_context_data(**kwargs)
+                return render(request, self.template_name, {'form': form,
+                                                            'profile': context['profile'],
+                                                            'invited_profiles': context['invited_profiles'],
+                                                            'title': context['title']
+                                                            })
             if not current_user.active_invite_code:
                 current_user.active_invite_code = form.cleaned_data['activated_code']
                 current_user.save()
             return redirect(reverse_lazy('profile', kwargs={'pass_code': self.kwargs['pass_code']}))
         else:
             form.add_error(None, 'Некорректный invite code')
+            context = self.get_context_data(**kwargs)
+
             return render(request, self.template_name,
-                          {'form': form}
-                           )
+                          {'form': form,
+                           'profile': context['profile'],
+                           'invited_profiles': context['invited_profiles'],
+                           'title': context['title']})
