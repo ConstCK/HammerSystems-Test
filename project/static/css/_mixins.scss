@@ -1,0 +1,42 @@
+ @mixin btn {
+        font-family: 'Secondary', Courier, monospace;
+        font-size: 18px;
+        font-weight: $btn-font-weight;
+        color: $btn-color;
+        background-color: $secondary-background-color;
+        box-shadow: 3px 6px black;
+        border-radius: 8px;
+        border: 1px solid black;
+        padding: 5px 20px;
+        margin: 10px;
+        transition: all 0.3s ease-out;
+        text-shadow: 6px 4px 2px rgba(0, 0, 0, 0.9);
+        cursor: pointer;
+     }
+
+ @mixin btn-hover {
+        transform: scale(1.05);
+        box-shadow: 4px 8px black;
+        color: white;
+        font-weight: $btn-active-font-weight;
+     }
+
+ @mixin btn-active {
+        color: black;
+        box-shadow: 2px 4px black;
+        border-radius: 10px;
+     }
+
+  @mixin row-position {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+     }
+
+  @mixin column-position {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+     }

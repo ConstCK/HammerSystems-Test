@@ -1,0 +1,97 @@
+@import 'variables';
+@import 'mixins';
+@import 'reset';
+
+body {
+        max-width: 90%;
+        display: flex;
+        flex: 1 0 auto;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        margin: 0 auto;
+        border: 8px groove #023236;
+        color: $primary-color;
+        background-color: $primary-background-color;
+        overflow-x: hidden;
+
+        .form-errors {
+            margin: 10px;
+            color: red;
+            font-size: 26px;
+        }
+
+        .form-btn, .nav-link {
+            @include btn;
+            margin: 10px 15px;
+
+            &:hover {
+                @include btn-hover;
+                }
+
+            &:active {
+                @include btn-active;
+                }
+            }
+
+        .header {
+            font-family: 'Header', Courier, monospace;
+            color: $primary-color;
+            border: 0.3px solid $border-color;
+            min-height: 15vh;
+
+            .main-title {
+                margin: 15px auto;
+                }
+
+            .nav-bar {
+                margin: 20px auto;
+                }
+            }
+
+        .main {
+            min-height: 60vh;
+            font-family: 'Primary', Courier, monospace;
+
+            .title {
+                color: $secondary-color;
+                font-family: 'Primary', Courier, monospace;
+                font-size: 40px;
+                margin: 20px auto;
+                }
+            }
+
+           .form-label {
+                margin: 15px;
+                font-size: $label-font-size;
+            }
+
+           .form-input {
+                margin: 5px auto 10px;
+
+               input, select {
+                    min-width: 50%;
+                    padding: 5px 15px;
+                    font-family: 'Primary', Courier, monospace;
+                    font-size: $input-font-size;
+                    text-align: center;
+                    }
+
+               }
+
+           .profile-info {
+               margin: 10px;
+               font-size: 22px;
+               }
+
+    }
+
+.footer {
+        @include column-position;
+        min-height: 15vh;
+        max-width: 100%;
+        border: 0.3px solid $border-color;
+        font-family: "Header", Courier, monospace;
+        font-size: 24px;
+        color: $secondary-color;
+    }

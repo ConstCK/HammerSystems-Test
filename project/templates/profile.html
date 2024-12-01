@@ -1,0 +1,28 @@
+{% extends 'default.html' %}
+{% block main %}
+    <div class="auth-page">
+        <h2 class="title">{{title}}</h2>
+        <div class="profile-info">Пользователь с номером телефона: {{profile.phone_number}}</div>
+        <div class="profile-info">Ваш invite code: {{profile.invite_code}}</div>
+        {% if profile.active_invite_code %}
+        <div class="profile-info">Активированный invite-code: {{profile.active_invite_code}}</div>
+        {% else%}
+            <form class="auth-form" method="post">
+                {% csrf_token %}
+                {% if form.errors %}
+                    <div class="form-errors">{{ form.non_field_errors }}</div>
+                {% endif %}
+                <div class="form-label">{{ form.activated_code.label }}</div>
+                <div class="form-input">{{ form.activated_code }}</div>
+                <button class="form-btn" type="submit">Активация</button>
+            </form>
+        {% endif %}
+        <div class="profile-info">Список пользователей (номеров), активировавшие Ваш invite code:</div>
+        {% for number in invited_profiles %}
+            <div class="profile-info">{{number.phone_number}}</div>
+        {% empty %}
+            <div class="profile-info">-</div>
+        {% endfor %}
+
+    </div>
+{% endblock main %}

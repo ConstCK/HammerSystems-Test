@@ -1,10 +1,11 @@
 from django.urls import path
 
-from .views import auth, login, activate_code, profile
+from .views import AuthUserView, SuccessfulAuth, activate_code, ProfileView, LoginView
 
 urlpatterns = [
-    path("auth/", auth, name='authentication'),
-    path("login/", login, name='authorization'),
-    path("activate/", activate_code, name='activate_code'),
-    path("profile/", profile, name='profile'),
+    path('auth/', AuthUserView.as_view(), name='authentication'),
+    path('login/', LoginView.as_view(), name='authorization'),
+    path('activate/', activate_code, name='activate_code'),
+    path('profile/<str:pass_code>', ProfileView.as_view(), name='profile'),
+    path('successful_auth/', SuccessfulAuth.as_view(), name='successful_auth'),
 ]

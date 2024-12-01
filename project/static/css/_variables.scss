@@ -1,0 +1,21 @@
+$primary-color: #00A67C;
+$secondary-color: chocolate;
+$primary-background-color: rgba(0,0,0,0.8);
+$secondary-background-color: teal;
+$border-color: #00727a;
+$input-font-size: 20px;
+$label-font-size: 24px;
+$btn-color: aqua;
+$btn-font-size: 20px;
+$btn-font-weight: 200;
+$btn-active-font-weight: 800;
+
+@font-face {
+  font-family: "Header";
+  src: url("/static/fonts/WoodenShipDecorated.ttf");
+}
+
+@font-face {
+  font-family: "Primary";
+  src: url("/static/fonts/Ardeco.ttf");
+}

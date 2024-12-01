@@ -1,0 +1,105 @@
+@font-face {
+  font-family: "Header";
+  src: url("/static/fonts/WoodenShipDecorated.ttf"); }
+
+@font-face {
+  font-family: "Primary";
+  src: url("/static/fonts/Ardeco.ttf"); }
+
+* h1, * h2, * h3 {
+  margin: 0; }
+
+* a,
+* :link,
+* :visited {
+  text-decoration: none;
+  color: #00A67C; }
+
+* li {
+  list-style: None; }
+
+body {
+  max-width: 90%;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+  border: 8px groove #023236;
+  color: #00A67C;
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow-x: hidden; }
+  body .form-errors {
+    margin: 10px;
+    color: red;
+    font-size: 26px; }
+  body .form-btn, body .nav-link {
+    font-family: 'Secondary', Courier, monospace;
+    font-size: 18px;
+    font-weight: 200;
+    color: aqua;
+    background-color: teal;
+    box-shadow: 3px 6px black;
+    border-radius: 8px;
+    border: 1px solid black;
+    padding: 5px 20px;
+    margin: 10px;
+    transition: all 0.3s ease-out;
+    text-shadow: 6px 4px 2px rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+    margin: 10px 15px; }
+    body .form-btn:hover, body .nav-link:hover {
+      transform: scale(1.05);
+      box-shadow: 4px 8px black;
+      color: white;
+      font-weight: 800; }
+    body .form-btn:active, body .nav-link:active {
+      color: black;
+      box-shadow: 2px 4px black;
+      border-radius: 10px; }
+  body .header {
+    font-family: 'Header', Courier, monospace;
+    color: #00A67C;
+    border: 0.3px solid #00727a;
+    min-height: 15vh; }
+    body .header .main-title {
+      margin: 15px auto; }
+    body .header .nav-bar {
+      margin: 20px auto; }
+  body .main {
+    min-height: 60vh;
+    font-family: 'Primary', Courier, monospace; }
+    body .main .title {
+      color: chocolate;
+      font-family: 'Primary', Courier, monospace;
+      font-size: 40px;
+      margin: 20px auto; }
+  body .form-label {
+    margin: 15px;
+    font-size: 24px; }
+  body .form-input {
+    margin: 5px auto 10px; }
+    body .form-input input, body .form-input select {
+      min-width: 50%;
+      padding: 5px 15px;
+      font-family: 'Primary', Courier, monospace;
+      font-size: 20px;
+      text-align: center; }
+  body .profile-info {
+    margin: 10px;
+    font-size: 22px; }
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 15vh;
+  max-width: 100%;
+  border: 0.3px solid #00727a;
+  font-family: "Header", Courier, monospace;
+  font-size: 24px;
+  color: chocolate; }
+
+/*# sourceMappingURL=styles.css.map */

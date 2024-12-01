@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load sass_tags %}
+<head>
+    <meta charset="UTF-8">
+    {% block head %}
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="main cheatsheet" />
+        <meta name="author" content="Constantin" />
+        <link href="{% sass_src 'css/styles.scss' %}"  rel="stylesheet" />
+        <title>Main page title</title>
+    {% endblock head %}
+</head>
+<body>
+    <header class="header">
+        {% block header %}
+        <h1 class="main-title">Тестовое задание для Hammer Systems</h1>
+        {% include "components/header.html" %}
+        {% endblock header %}
+    </header>
+    <main class="main">
+        {% block main %}
+        {% endblock main %}
+        {% block scripts %}
+            <script src="{% static 'js/main.js' %}"></script>
+        {% endblock scripts %}
+    </main>
+    <footer class="footer">
+        {% block footer %}
+    <!--Включение компонента footer.html в состав шаблона-->
+        {% include 'components/footer.html' %}
+        {% endblock footer %}
+    </footer>
+</body>
+
+</html>

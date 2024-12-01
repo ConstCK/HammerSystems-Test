@@ -1,0 +1,15 @@
+{% extends 'default.html' %}
+{% block main %}
+    <div class="auth-page">
+        <h2 class="title">{{title}}</h2>
+        <form class="auth-form" method="post">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="form-errors">{{ form.non_field_errors }}</div>
+            {% endif %}
+            <div class="form-label">{{ form.pass_code.label }}</div>
+            <div class="form-input">{{ form.pass_code }}</div>
+            <button class="form-btn" type="submit">Авторизация</button>
+        </form>
+    </div>
+{% endblock main %}

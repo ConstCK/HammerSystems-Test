@@ -1,0 +1,16 @@
+ * {
+     h1, h2, h3 {
+            margin: 0;
+            }
+
+     a,
+     :link,
+     :visited {
+         text-decoration: none;
+         color: $primary-color;
+     }
+
+     li {
+        list-style: None;
+        }
+    }
