@@ -160,6 +160,7 @@ class AuthUserView(FormView):
             else:
                 user.pass_code = pass_code
                 user.save()
+            time.sleep(2)
             return render(request, 'successful_auth.html',
                           {'pass_code': pass_code})
 
